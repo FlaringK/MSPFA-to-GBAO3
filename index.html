@@ -7,18 +7,38 @@
 
   <link rel="stylesheet" href="GB.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="ico.png">
 </head>
 <body>
   
-  <h1>MSPFA to AO3</h1>
+  <h1><img src="ico.png" style="height: 2em; margin-bottom: -0.75em"> MSPFA to AO3</h1>
+
+  <h2>What is this?</h2>
+  <p> This is a pretty silly converter to put MSPaint Fan Adventure Adventures into Archive of our own. Credit to <a href="https://twitter.com/EtchJetty">EtchJetty</a> for coming up with the <a href="https://archiveofourown.org/works/36776284">adventure in a story concept</a> in the first place. There are a few limitations; since HTML in AO3 is a bit of a pain, currently only the colors in the <a href="https://archiveofourown.org/skins/277">offical AO3 Homestuck Workskin</a> are supported (as well as #00ff00). Also any custom CSS on the adventure itself is out the window as well, sorry. It is posssible to convert the adventure's css but it has to be done manually, since AO3 is also a bit a pain regarding CSS. Also no text backgrounds, fonts, text size or MSPFA user tags, due to the CSS being a pain, and no flashes, mp4 embeds or youtube videos, simply because AO3 removes them.</p>
+
+  <h2>Step one</h2>
+  <p>Intall the <a href="https://mspfa.com/?s=36596&p=1">MSPFA Extras userscript</a> and download your adventure's JSON export from the adventure info page</p>
+
+  <h2>Step two</h2>
+  <p>Upload the adventure JSON here:</p>
+  <input type="file" id="selectFiles" value="Import" onchange="importJson()" />
+
+  <h2>Step three</h2>
+  <p>Create your AO3 story and apply this skin to it: 
+    <a href="https://archiveofourown.org/skins/984042">https://archiveofourown.org/skins/984042</a>
+  </p>
+
+  <h2>Step four</h2>
+  <p>Copy the HTML down below and paste it into your story! Congratulations, you've done it.</p>
+
+  <h2>AO3 HTML</h2>
+  <textarea id="ao3html" cols="90" rows="20"></textarea>
 
   <h2>Preview</h2>
   <div id="workskin">
 
     <div class="workskinWarning">
-      <h1>If you see this text, that means the workskin is <b>not</b> enabled. Please
-         enable the workskin in order to view the content as intended.
-      </h1>
+      <h1>If you see this text, that means the workskin is <b>not</b> enabled. Please enable the workskin in order to view the content as intended.</h1>
    </div>
 
    <div class="mspaWrap">

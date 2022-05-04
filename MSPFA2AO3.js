@@ -4,11 +4,31 @@ fetch("./Tnstaap.json").then(response => {
    return response.json();
 }).then(data => convertJson(data));
 
+const importJson = () => {
+  const files = document.getElementById("selectFiles").files
+
+  if (!files.length) return;
+  
+  var fr = new FileReader();
+
+  fr.onload = function(e) { 
+    console.log(e);
+      var result = JSON.parse(e.target.result);
+      var formatted = JSON.stringify(result, null, 2);
+      //    document.getElementById('result').value = formatted;
+      convertJson(result)
+    }
+  
+  fr.readAsText(files.item(0));
+
+}
+
 // Actual function
 const convertJson = storyData => {
   console.log(storyData)
 
   let comic = document.getElementsByClassName("comicContent")[0]
+  comic.innerHTML = ""
 
   storyData.p.forEach((pageData, pageIndex) => {
 
@@ -17,6 +37,7 @@ const convertJson = storyData => {
     pageHook.rel = "nofollow"
     pageHook.className = "story-link"
     pageHook.id = "page-" + (pageIndex + 1)
+    pageHook.name = "page-" + (pageIndex + 1)
 
     let pageWrap = document.createElement("div")
     pageWrap.className = "story-page"
@@ -39,9 +60,11 @@ const convertJson = storyData => {
       let nextPageLink = document.createElement("a")
       nextPageLink.rel = "nofollow"
       nextPageLink.href = "#page-" + nextPageIndex
-      nextPageLink.innerText = storyData.p[nextPageIndex] ? storyData.p[nextPageIndex].c : storyData.m
+      nextPageLink.innerText = storyData.p[nextPageIndex - 1] ? storyData.p[nextPageIndex - 1].c : storyData.m
 
+      nextPageLinkWrap.appendChild(document.createTextNode("> "))
       nextPageLinkWrap.appendChild(nextPageLink)
+      nextPageLinkWrap.appendChild(document.createElement("br"))
     })
 
     // Create game links
@@ -67,8 +90,22 @@ const convertJson = storyData => {
     comic.prepend(pageHook)
   })
 
+  // Dummy link to be preoended
+  let dummyDiv = document.createElement("div")
+  dummyDiv.className = "story-page"
+  dummyDiv.innerText = "This is a dummy page, just... trust me, it's needed"
 
-  // Redo first page
+  comic.prepend(dummyDiv)
+  comic.prepend(document.createElement("a"))
+
+  let finalHTML = document.getElementById("workskin").innerHTML.replaceAll("<br><br>", "<br>\n\n<br>")
+
+  for (const [key, value] of Object.entries(hsColors)) {
+    finalHTML = finalHTML.replaceAll('style="color: ' + key + ';"', "class=" + value)
+    console.log(key, value)
+  }
+
+  document.getElementById("ao3html").value = finalHTML 
 
 }
 
@@ -122,9 +159,15 @@ let MSPFAparseBBcode = (code, noHTML) => {
 // BBCODE
 
 let MSPFABBC=[
+  [/  /g,
+  '&nbsp;&nbsp;'],
+  [
+    /\t/g,
+    '&nbsp;&nbsp;&nbsp;&nbsp;'
+  ],
   [
     /\r?\n/g,
-    '<p>'
+    '<br>'
   ],
   [
     /\[b\]((?:(?!\[b\]).)*?)\[\/b\]/gi,
@@ -192,15 +235,15 @@ let MSPFABBC=[
   ],
   [
     /\[spoiler\]((?:(?!\[spoiler(?: .*?)?\]).)*?)\[\/spoiler\]/gi,
-    '<div class="block">$1</div>'
+    '<div class="spoiler">$1</div>'
   ],
   [
     /\[spoiler open=("?)([^"]*?)\1 close=("?)([^"]*?)\3\]((?:(?!\[spoiler(?: .*?)?\]).)*?)\[\/spoiler\]/gi,
-    '<div class="block">$5</div>'
+    '<div class="spoiler">$5</div>'
   ],
   [
     /\[spoiler close=("?)([^"]*?)\1 open=("?)([^"]*?)\3\]((?:(?!\[spoiler(?: .*?)?\]).)*?)\[\/spoiler\]/gi,
-    '<div class="block">$5</div>'
+    '<div class="spoiler">$5</div>'
   ],
   [
     /\[flash=(\d*?)x(\d*?)\](.*?)\[\/flash\]/gi,
@@ -211,3 +254,38 @@ let MSPFABBC=[
     ''
   ]
 ]
+
+// HOMESTUCK COLOURS
+
+const hsColors = {
+  "#000000": "black",
+  "#ffffff": "scratch",
+  "#a10000": "aradia",
+  "#e00707": "AR",
+  "#0000ff": "athblue",
+  "#ff0000": "athred",
+  "#00ff00": "athgreen",
+  "#f2a400": "strider",
+  "#4b4b4b": "dad",
+  "#000056": "equius",
+  "#6a006a": "eridan",
+  "#77003c": "feferi",
+  "#2b0057": "gamzee",
+  "#4ac925": "jade",
+  "#1f9400": "jadesprite",
+  "#00d5f2": "jane",
+  "#ff6ff2": "jaspersprite",
+  "#0715cd": "john",
+  "#008141": "kanaya",
+  "#626262": "karkat",
+  "#416600": "nepeta",
+  "#b536da": "rose",
+  "#a1a100": "sollux",
+  "#a15000": "tavros",
+  "#008282": "terezi",
+  "#929292": "uu",
+  "#323232": "undyingumbrage",
+  "#005682": "vriska",
+  "#2ed73a": "altcaliborn",
+  "#678900": "limeblood"
+}

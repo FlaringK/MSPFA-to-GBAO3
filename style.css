@@ -8,3 +8,8 @@ body {
   margin: 20px;
   padding: 20px;
 }
+
+body > p {
+  max-width: 940px;
+  margin: auto;
+}

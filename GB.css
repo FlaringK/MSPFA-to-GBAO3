@@ -1,5 +1,3 @@
-/* Homestuck mechanism */
-
 #workskin .story-page {
   display: none;
 }
@@ -20,8 +18,6 @@
   display: none;
 }
 
-/* Visual Styling */
-
 #workskin .mspaWrap p {
   margin: 0;
   line-height: 1.35;
@@ -29,6 +25,12 @@
 
 #workskin .mspaWrap {
   background-color: #535353;
+  color: black;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#workskin .mspaWrap a {
+  color: unset;
 }
 
 #workskin .contentBox {
@@ -45,19 +47,21 @@
   margin: 0 auto;
   padding: 0 25px;
   text-align: center;
-  
   font-weight: bold;
   font-size: 14px;
 }
 
 #workskin .comicContent img {
   margin: 0 -25px;
+  max-width: 100vw;
 }
 
 #workskin .comicContent h2 {
   font-size: xx-large;
   padding: 14px 0;
   margin: 0;
+  font-weight: 600;
+  color: black;
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -72,22 +76,55 @@
   padding-top: 30px;
   padding-bottom: 30px;
   max-width: 590px;
-
   text-align: left;
 }
 
-#workskin .mspaWrap .links > a::before {
-  content: "> ";
-  display: inline-block;
-  margin-right: 10px;
-  color: black
+#workskin .spoiler {
+  border: 1px dashed gray;
+  padding: 15px 5%;
+  text-align: left;
 }
 
 #workskin .mspaWrap .gameLinks {
   font-family: Verdana, Arial, Helvetica, sans-serif;
-  text-align: center;
+  text-align: left;
   font-weight: bold;
   font-size: 10px;
-  text-align: left;
   padding-bottom: 14px;
 }
+
+
+#workskin .black { color: #000000 } 
+#workskin .white { color: #ffffff } 
+#workskin .aradia { color: #a10000 } 
+#workskin .AR { color: #e00707 } 
+#workskin .athblue { color: #0000ff } 
+#workskin .athred { color: #ff0000 } 
+#workskin .athgreen { color: #00ff00 } 
+#workskin .bro { color: #f2a400 } 
+#workskin .dad { color: #4b4b4b } 
+#workskin .equius { color: #000056 } 
+#workskin .eridan { color: #6a006a } 
+#workskin .exile { color: #ffffff } 
+#workskin .feferi { color: #77003c } 
+#workskin .gamzee { color: #2b0057 } 
+#workskin .jade { color: #4ac925 } 
+#workskin .jadesprite { color: #1f9400 } 
+#workskin .jane { color: #00d5f2 } 
+#workskin .jaspersprite { color: #ff6ff2 } 
+#workskin .john { color: #0715cd } 
+#workskin .kanaya { color: #008141 } 
+#workskin .karkat { color: #626262 } 
+#workskin .nepeta { color: #416600 } 
+#workskin .rose { color: #b536da } 
+#workskin .scratch-green { color: #ffffff } 
+#workskin .scratch { color: #ffffff } 
+#workskin .sollux { color: #a1a100 } 
+#workskin .strider { color: #f2a400 } 
+#workskin .tavros { color: #a15000 } 
+#workskin .terezi { color: #008282 } 
+#workskin .uu { color: #929292 } 
+#workskin .undyingumbrage { color: #323232 } 
+#workskin .vriska { color: #005682 } 
+#workskin .altcaliborn { color: #2ed73a } 
+#workskin .limeblood { color: #678900 } 
