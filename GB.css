@@ -1,0 +1,93 @@
+/* Homestuck mechanism */
+
+#workskin .story-page {
+  display: none;
+}
+
+#workskin .workskinWarning {
+  display: none;
+}
+
+#workskin .story-link:target + .story-page {
+  display: block;
+}
+
+#workskin #page-1 + .story-page {
+  display: block;
+}
+
+#workskin .story-link:target ~ #page-1 + .story-page {
+  display: none;
+}
+
+/* Visual Styling */
+
+#workskin .mspaWrap p {
+  margin: 0;
+  line-height: 1.35;
+}
+
+#workskin .mspaWrap {
+  background-color: #535353;
+}
+
+#workskin .contentBox {
+  background-color: #c6c6c6;
+  max-width: 970px;
+  margin: 0 auto;
+  padding-top: 15px;
+  padding-bottom: 30px;
+}
+
+#workskin .comicContent {
+  background-color: #eeeeee;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 25px;
+  text-align: center;
+  
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#workskin .comicContent img {
+  margin: 0 -25px;
+}
+
+#workskin .comicContent h2 {
+  font-size: xx-large;
+  padding: 14px 0;
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#workskin .mspaWrap a {
+  text-decoration-style: solid;
+}
+
+#workskin .mspaWrap .links {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  max-width: 590px;
+
+  text-align: left;
+}
+
+#workskin .mspaWrap .links > a::before {
+  content: "> ";
+  display: inline-block;
+  margin-right: 10px;
+  color: black
+}
+
+#workskin .mspaWrap .gameLinks {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-weight: bold;
+  font-size: 10px;
+  text-align: left;
+  padding-bottom: 14px;
+}

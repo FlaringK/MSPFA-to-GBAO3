@@ -1,0 +1,10 @@
+body {
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#workskin {
+  outline: solid black;
+  margin: 20px;
+  padding: 20px;
+}
