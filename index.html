@@ -27,7 +27,14 @@
 
   <h2>Step two</h2>
   <p>Upload the adventure JSON here:</p>
-  <input type="file" id="selectFiles" value="Import" onchange="importJson()" />
+  <input type="file" id="selectFiles" value="Import" onchange="importJson()"/>
+
+  <p>Choose the range of pages you'd like to export:</p>
+  <input type="number" name="" id="pagemin" value="1" min="1">
+  <input type="number" name="" id="pagemax" value="413" min="1">
+
+  <p>And hit this button!</p>
+  <button onclick="convertJson()">Import JSON</button>
 
   <h2>Step three</h2>
   <p>Create your AO3 story and apply this skin to it: 
@@ -39,6 +46,7 @@
 
   <h2>AO3 HTML</h2>
   <textarea id="ao3html" cols="90" rows="20"></textarea>
+  <span id="count"></span>
 
   <h2>Preview</h2>
   <div id="workskin">

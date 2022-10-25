@@ -1,8 +1,13 @@
 
+let storyData
+
 // Testing, replace with upload later
-fetch("./Tnstaap.json").then(response => {
+fetch("./AllHomestuck.json").then(response => {
    return response.json();
-}).then(data => convertJson(data));
+}).then(data => {
+  storyData = data
+  convertJson()
+});
 
 const importJson = () => {
   const files = document.getElementById("selectFiles").files
@@ -16,7 +21,8 @@ const importJson = () => {
       var result = JSON.parse(e.target.result);
       var formatted = JSON.stringify(result, null, 2);
       //    document.getElementById('result').value = formatted;
-      convertJson(result)
+      storyData = result
+      convertJson()
     }
   
   fr.readAsText(files.item(0));
@@ -24,13 +30,21 @@ const importJson = () => {
 }
 
 // Actual function
-const convertJson = storyData => {
+const convertJson = () => {
   console.log(storyData)
 
   let comic = document.getElementsByClassName("comicContent")[0]
   comic.innerHTML = ""
 
-  storyData.p.forEach((pageData, pageIndex) => {
+  len = storyData.p.length
+
+  let start = document.getElementById("pagemin").value > len ? len : document.getElementById("pagemin").value
+  let end = document.getElementById("pagemax").value > len ? len : document.getElementById("pagemax").value
+
+  for (let i = start - 1; i < end; i++) {
+
+    pageData = storyData.p[i]
+    pageIndex = i - start + 1
 
     // link to page to account for weird ao3 shit
     let pageHook = document.createElement("a")
@@ -57,6 +71,21 @@ const convertJson = storyData => {
     pageWrap.appendChild(nextPageLinkWrap)
 
     pageData.n.forEach(nextPageIndex => {
+
+      let nextPageLink = document.createElement("a")
+      nextPageLink.rel = "nofollow"
+      nextPageLink.href = "#page-" + (nextPageIndex - start + 1)
+      nextPageLink.innerText = storyData.p[nextPageIndex - 1] ? storyData.p[nextPageIndex - 1].c : storyData.m
+
+      nextPageLinkWrap.appendChild(document.createTextNode("> "))
+      nextPageLinkWrap.appendChild(nextPageLink)
+      nextPageLinkWrap.appendChild(document.createElement("br"))
+    })
+
+    if (!pageData.n.length) {
+      let nextPageIndex = (pageIndex + 2)
+      console.log(pageIndex, pageIndex + 2)
+
       let nextPageLink = document.createElement("a")
       nextPageLink.rel = "nofollow"
       nextPageLink.href = "#page-" + nextPageIndex
@@ -65,7 +94,7 @@ const convertJson = storyData => {
       nextPageLinkWrap.appendChild(document.createTextNode("> "))
       nextPageLinkWrap.appendChild(nextPageLink)
       nextPageLinkWrap.appendChild(document.createElement("br"))
-    })
+    }
 
     // Create game links
     let gamelinkWrap = document.createElement("div")
@@ -88,7 +117,7 @@ const convertJson = storyData => {
 
     comic.prepend(pageWrap)
     comic.prepend(pageHook)
-  })
+  }
 
   // Dummy link to be preoended
   let dummyDiv = document.createElement("div")
@@ -107,6 +136,7 @@ const convertJson = storyData => {
 
   document.getElementById("ao3html").value = finalHTML 
 
+  document.getElementById("count").innerHTML = "Character Count = " + finalHTML.split("").length + " / 500000"
 }
 
 
@@ -247,7 +277,7 @@ let MSPFABBC=[
   ],
   [
     /\[flash=(\d*?)x(\d*?)\](.*?)\[\/flash\]/gi,
-    ''
+    'This was a flash, but it\'s broken now, sorry!'
   ],
   [
     /\[user\](.+?)\[\/user\]/gi,
