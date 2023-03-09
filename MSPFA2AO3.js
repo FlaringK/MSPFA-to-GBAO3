@@ -103,7 +103,7 @@ const convertJson = () => {
 
     let startover = document.createElement("a")
     startover.rel = "nofollow"
-    startover.href = "#page-1"
+    startover.href = document.getElementById("startoverlink").value
     startover.innerText = "Start Over"
 
     let goback = document.createElement("a")
@@ -134,7 +134,7 @@ const convertJson = () => {
     console.log(key, value)
   }
 
-  document.getElementById("ao3html").value = finalHTML 
+  document.getElementById("ao3html").value = finalHTML.replace(/<div|<p/g, "<span").replace(/<h2/g, "<span class='h2'").replace(/<\/div|<\/p|<\/h2/g, "</span")
 
   document.getElementById("count").innerHTML = "Character Count = " + finalHTML.split("").length + " / 500000"
 }
