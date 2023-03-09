@@ -41,6 +41,20 @@ const convertJson = () => {
   let start = document.getElementById("pagemin").value > len ? len : document.getElementById("pagemin").value
   let end = document.getElementById("pagemax").value > len ? len : document.getElementById("pagemax").value
 
+  if (document.getElementById("useDate").checked) {
+    let datemin = document.getElementById("datemin").valueAsNumber
+    let datemax = document.getElementById("datemax").valueAsNumber
+
+    let endSet = false
+    storyData.p.forEach((e, i) => {
+      if (e.d < datemin) start = i + 1
+      if (e.d > datemax && !endSet) {
+        end = i - 1
+        endSet = true
+      }
+    })
+  }
+
   for (let i = start - 1; i < end; i++) {
 
     pageData = storyData.p[i]
